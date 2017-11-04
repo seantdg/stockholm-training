@@ -1,0 +1,17 @@
+<RaiseFault name="RaiseFault.InvalidGrant">
+ <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+ <FaultResponse>
+   <Set>
+     <Payload contentType="application/json" variablePrefix="$" variableSuffix="#">
+		{
+			"error":"400.02.001",
+			"exceptionId": "9d393-mckdsks88-93jjlss",
+			"message":"Invalid grant type",
+			"url": "https://httpbin.org/get"
+		}
+     </Payload>
+     <StatusCode>400</StatusCode>
+     <ReasonPhrase>Bad Request</ReasonPhrase>
+   </Set>
+ </FaultResponse>
+</RaiseFault>

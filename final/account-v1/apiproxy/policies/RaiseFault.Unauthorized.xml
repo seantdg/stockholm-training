@@ -1,0 +1,17 @@
+<RaiseFault name="RaiseFault.Unauthorized">
+ <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+ <FaultResponse>
+   <Set>
+     <Payload contentType="application/json" variablePrefix="$" variableSuffix="#">
+		{
+			"error":"401.01.001",
+			"exceptionId": "9d393-mckdsks88-93jjlss",
+			"message":"Unauthorized - $apiproxy.name#",
+			"url": "https://httpbin.org/get"
+		}
+     </Payload>
+     <StatusCode>401</StatusCode>
+     <ReasonPhrase>Unauthorized</ReasonPhrase>
+   </Set>
+ </FaultResponse>
+</RaiseFault>

@@ -1,0 +1,8 @@
+<PopulateCache name="PopulateCache.ClientStatus">
+    <CacheKey>
+        <KeyFragment ref="client_id"/>
+    </CacheKey>
+    <CacheResource>registryCache</CacheResource>
+    <Scope>Exclusive</Scope>
+    <Source>RegistryResponse.status.code</Source>
+</PopulateCache>

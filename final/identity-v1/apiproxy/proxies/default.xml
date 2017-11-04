@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ProxyEndpoint name="default">
+    <PreFlow>
+    </PreFlow>
+    <Flows>
+		<Flow name="generate">
+			<Request>
+				<!-- raise an error if grant type isn't authorization_code -->
+				<Step>
+					<Name>RaiseFault.InvalidGrant</Name>
+					<Condition>request.formparam.grant_type != "authorization_code"</Condition>
+				</Step>
+				<!-- overwrite grant_type with client_credentials -->
+				<Step>
+					<Name>Assign.GrantType</Name>
+				</Step>
+				<Step>
+					<Name>Callout.IdentityServer</Name>
+				</Step>
+				<Step>
+					<Name>Extract.Token</Name>
+				</Step>
+				<Step>
+					<Name>Assign.AuthStatus</Name>
+				</Step>
+				<Step>
+					<Name>OAuth.ExternalToken</Name>
+				</Step>
+			</Request>
+			<Condition>proxy.pathsuffix = "/token"</Condition>
+		</Flow>
+		<Flow name="http get">
+			<Request>
+				<Step>
+					<Name>ValidateToken</Name>
+				</Step>
+			</Request>
+			<Condition>proxy.pathsuffix = "/get"</Condition>
+		</Flow>
+	</Flows>
+    <PostFlow>
+        <Request/>
+        <Response/>
+    </PostFlow>
+    <RouteRule name="default">
+        <TargetEndpoint>default</TargetEndpoint>
+    </RouteRule>
+    <HTTPProxyConnection>
+        <BasePath>/identity/v1</BasePath>
+        <VirtualHost>secure</VirtualHost>
+        <VirtualHost>default</VirtualHost>
+    </HTTPProxyConnection>
+</ProxyEndpoint>

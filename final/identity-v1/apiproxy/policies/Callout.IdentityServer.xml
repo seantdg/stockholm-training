@@ -1,0 +1,18 @@
+<ServiceCallout name="Callout.IdentityServer">
+    <Request>
+      <Set>
+	  	<Headers>
+			<Header name="Authorization">{request.header.Authorization}</Header>
+		</Headers>
+        <QueryParams>
+          <QueryParam name="grant_type">client_credentials</QueryParam>
+        </QueryParams>
+		<Verb>POST</Verb>
+      </Set>
+    </Request>
+    <Response>identityServerResponse</Response>
+    <Timeout>30000</Timeout>
+    <HTTPTargetConnection>
+      <URL>https://sdavisstockholm-eval-test.apigee.net/oauth/client_credential/accesstoken</URL>
+    </HTTPTargetConnection>
+</ServiceCallout>

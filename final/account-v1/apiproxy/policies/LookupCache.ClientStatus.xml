@@ -1,0 +1,8 @@
+<LookupCache name="LookupCache.ClientStatus">
+    <CacheKey>
+        <KeyFragment ref="client_id"/>
+    </CacheKey>
+    <CacheResource>registryCache</CacheResource>
+    <Scope>Exclusive</Scope>
+    <AssignTo>registryResult</AssignTo>
+</LookupCache>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<TargetEndpoint name="default">
+    <PreFlow/>
+    <Flows>
+		<Flow name="get accounts">
+			<Response>
+				<Step>
+					<Name>JS.MediatePayload</Name>
+				</Step>
+			</Response>
+			<Condition>request.verb = "GET"</Condition>
+			<!-- Condition>proxy.pathsuffix = "/accounts" AND request.verb = "GET"</Condition -->
+		</Flow>
+	</Flows>
+    <PostFlow/>
+    <HTTPTargetConnection>
+        <URL>http://sdavisstockholm-eval-test.apigee.net/mock/v1/accounts</URL>
+    </HTTPTargetConnection>
+</TargetEndpoint>

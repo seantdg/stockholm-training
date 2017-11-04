@@ -1,0 +1,4 @@
+<OAuthV2 name="OAuthV2.VerifyToken" continueOnError="false">
+	<Operation>VerifyAccessToken</Operation>
+	<Scope>read.accounts</Scope>
+</OAuthV2>

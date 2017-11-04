@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ProxyEndpoint name="default">
+	<FaultRules>
+		<FaultRule name="unauthorized">
+			<Step>
+				<Name>RaiseFault.Unauthorized</Name>
+			</Step>
+			<Condition>oauthV2.OAuthV2.VerifyToken.failed = true OR registryResult = 401</Condition>
+		</FaultRule>
+		<DefaultFaultRule>
+			<Step>
+				<Name>RaiseFault.InternalServerError</Name>
+			</Step>
+		</DefaultFaultRule>
+	</FaultRules>
+    <PreFlow>
+        <Request>
+			<Step>
+				<Name>SpikeArrest</Name>
+			</Step>
+			<Step>
+				<Name>OAuthV2.VerifyToken</Name>
+			</Step>
+			<Step>
+				<Name>LookupCache.ClientStatus</Name>
+			</Step>
+			<Step>
+				<Name>Callout.RegistryCheck</Name>
+				<Condition>lookupcache.LookupCache.ClientStatus.cachehit = false</Condition>
+			</Step>
+			<Step>
+				<Name>PopulateCache.ClientStatus</Name>
+				<Condition>lookupcache.LookupCache.ClientStatus.cachehit = false</Condition>
+			</Step>
+			<Step>
+				<Name>RaiseFault.Unauthorized</Name>
+				<Condition>registryResult = 401</Condition>
+			</Step>
+		</Request>
+        <Response/>
+    </PreFlow>
+    <Flows/>
+    <PostFlow>
+        <Request/>
+        <Response/>
+    </PostFlow>
+    <RouteRule name="default">
+        <TargetEndpoint>default</TargetEndpoint>
+    </RouteRule>
+    <HTTPProxyConnection>
+        <BasePath>/account/v1</BasePath>
+        <VirtualHost>secure</VirtualHost>
+        <VirtualHost>default</VirtualHost>
+    </HTTPProxyConnection>
+</ProxyEndpoint>

@@ -1,0 +1,17 @@
+<ServiceCallout name="Callout.RegistryCheck" continueOnError="true">
+    <Request variable="RegistryRequest">
+      <Set>
+	  	<Payload contentType="application/json" variablePrefix="$" variableSuffix="#">
+			{
+				"clientId": "$client_id#"
+			}
+	  	</Payload>
+	  	<Verb>POST</Verb>
+      </Set>
+    </Request>
+    <Response>RegistryResponse</Response>
+    <Timeout>30000</Timeout>
+    <HTTPTargetConnection>
+      <URL>https://sdavisstockholm-eval-test.apigee.net/mock/v1/validate</URL>
+    </HTTPTargetConnection>
+</ServiceCallout>

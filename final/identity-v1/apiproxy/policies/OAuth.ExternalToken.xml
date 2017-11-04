@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<OAuthV2 async="false" continueOnError="false" enabled="true" name="OAuth.ExternalToken">
+    <DisplayName>AttachToken</DisplayName>
+    <Attributes/>
+    <ExternalAuthorization>true</ExternalAuthorization>
+    <ExternalAccessToken>identityServerToken</ExternalAccessToken>
+    <Operation>GenerateAccessToken</Operation>
+    <SupportedGrantTypes>
+        <GrantType>client_credentials</GrantType>
+    </SupportedGrantTypes>
+    <GenerateResponse enabled="true"/>
+    <StoreToken>true</StoreToken>
+    <Tokens/>
+</OAuthV2>
